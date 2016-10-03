@@ -1,0 +1,50 @@
+<html>
+
+<head>
+<title>Errata</title>
+</head>
+
+<style type="text/css">
+body       {font-family: arial, helvetica, sans-serif; color: black; background-color: white; }
+h2         { background-color: lightgrey; min-width: 100%; } 
+pre        { font-family: monospace; }
+.highlight { background-color: yellow; }
+</style>
+
+<body>
+<h1>Kylix: <small>The Professional Developer's Guide and Reference</small></h1>
+<h2>Errata</h2>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>
+<td align="left"><b>Page 31</b></td>
+<td align="right"><i>found by <a href=mailto:"michael@roessler.com">Michael R&ouml;&szlig;ler &lt;michael@roessler.com&gt;</a></i></td>
+</tr></table>
+
+<pre><b>function</b> PopString(<b>var</b> S: <b>string</b>; <b>const</b> Delimiter: <b>string</b>): <b>string</b>;
+<i>// Returns the chars to the left of the Delimiter (or whole string);</i>
+<i>// sets S to chars to right of Delimiter (or '')</i>
+<b>var</b>
+  <b>Index</b>: integer;
+<b>begin</b>
+  <b>Index</b> := FirstMatch(S, Delimiter);
+  Result := Copy(S, 1, <strike class="highlight">Delimiter</strike> - 1);         <i>// Return leftmost</i>
+  Delete(S, 1, <b>Index</b> + Length(Delimiter) - 1); <i>// Remove from S</i>
+<b>end</b>; <i>// PopString</i>
+</pre>
+
+should be
+
+<pre><b>function</b> PopString(<b>var</b> S: <b>string</b>; <b>const</b> Delimiter: <b>string</b>): <b>string</b>;
+<i>// Returns the chars to the left of the Delimiter (or whole string);</i>
+<i>// sets S to chars to right of Delimiter (or '')</i>
+<b>var</b>
+  <b>Index</b>: integer;
+<b>begin</b>
+  <b>Index</b> := FirstMatch(S, Delimiter);
+  Result := Copy(S, 1, <u class="highlight">Index</u> - 1);             <i>// Return leftmost</i>
+  Delete(S, 1, <b>Index</b> + Length(Delimiter) - 1); <i>// Remove from S</i>
+<b>end</b>; <i>// PopString</i>
+</pre>
+
+</body>
+</html>
